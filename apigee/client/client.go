@@ -123,11 +123,11 @@ func NewClient(username string, password string, accessToken string, useSSL bool
 }
 
 func (c *Client) IsPublic() bool {
-	return (c.server == PublicApigeeServer) || (c.server == GoogleApigeeServer)
+	return (c.server == PublicApigeeServer) || strings.Contains(c.server, GoogleApigeeServer)
 }
 
 func (c *Client) IsGoogle() bool {
-	return c.server == GoogleApigeeServer
+    return strings.Contains(c.server, GoogleApigeeServer)
 }
 
 func (c *Client) HttpRequest(method string, path string, query url.Values, headerMap http.Header, body *bytes.Buffer) (closer io.ReadCloser, err error) {
